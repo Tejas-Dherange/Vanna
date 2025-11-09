@@ -4,10 +4,10 @@ After=network.target
 
 [Service]
 User=ubuntu
-WorkingDirectory=/home/ubuntu/vanna_v2
-Environment="PATH=/home/ubuntu/vanna_v2/venv/bin"
-EnvironmentFile=/home/ubuntu/vanna_v2/.env
-ExecStart=/home/ubuntu/vanna_v2/venv/bin/gunicorn -w 4 -k uvicorn.workers.UvicornWorker app:server.app --bind 0.0.0.0:8080
+WorkingDirectory=/home/ubuntu/Vanna
+Environment="PATH=/home/ubuntu/Vanna/venv/bin"
+EnvironmentFile=/home/ubuntu/Vanna/.env
+ExecStart=/home/ubuntu/Vanna/venv/bin/gunicorn -w 4 -k uvicorn.workers.UvicornWorker app:server.app --bind 0.0.0.0:8081
 Restart=always
 
 [Install]

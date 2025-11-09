@@ -7,12 +7,12 @@ sudo apt-get upgrade -y
 # Install Python and required system packages
 sudo apt-get install -y python3.11 python3.11-venv python3-pip nginx
 
-# Create project directory
-mkdir -p ~/vanna_v2
+# Create project directory (if it doesn't exist)
+mkdir -p ~/Vanna
 
 # Create and activate virtual environment
-python3 -m venv ~/vanna_v2/venv
-source ~/vanna_v2/venv/bin/activate
+python3 -m venv ~/Vanna/venv
+source ~/Vanna/venv/bin/activate
 
 # Install required packages
 pip install --upgrade pip
@@ -31,8 +31,8 @@ server {
     listen 80;
     server_name your_domain_or_ip;
 
-    location / {
-        proxy_pass http://localhost:8080;
+    location /vanna/ {
+        proxy_pass http://localhost:8081/;
         proxy_http_version 1.1;
         proxy_set_header Upgrade \$http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -42,7 +42,6 @@ server {
 }
 EOF
 
-# Enable nginx site
-sudo ln -s /etc/nginx/sites-available/vanna /etc/nginx/sites-enabled/
-sudo rm -f /etc/nginx/sites-enabled/default
-sudo systemctl restart nginx
+# Add vanna configuration to existing nginx setup
+sudo cp /etc/nginx/sites-available/vanna /etc/nginx/sites-available/vanna.conf
+sudo nginx -t && sudo systemctl reload nginx
