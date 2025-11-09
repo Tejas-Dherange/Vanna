@@ -1,0 +1,4 @@
+vanna[fastapi,gemini] @ git+https://github.com/vanna-ai/vanna.git@v2
+psycopg2-binary
+python-dotenv
+uvicorn

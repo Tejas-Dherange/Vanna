@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: vanna-app
+    plan: free
+    docker:
+      dockerfile: Dockerfile
+      dockerContext: .
+    envVars:
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+    healthCheckPath: /health
+    ports:
+      - port: 8000
+        type: http
